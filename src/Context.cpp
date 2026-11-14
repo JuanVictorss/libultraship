@@ -373,9 +373,13 @@ std::string Context::GetShortName() {
     return mShortName;
 }
 
+#ifndef LUS_ANDROID_DATA_DIR
+#define LUS_ANDROID_DATA_DIR "/storage/emulated/0/SOH"
+#endif
+
 std::string Context::GetAppBundlePath() {
 #if defined(__ANDROID__)
-    const char* externaldir = "/storage/emulated/0/SOH";//SDL_AndroidGetExternalStoragePath();
+    const char* externaldir = LUS_ANDROID_DATA_DIR;//SDL_AndroidGetExternalStoragePath();
     if (externaldir != NULL) {
         return externaldir;
     }
@@ -416,7 +420,7 @@ std::string Context::GetAppBundlePath() {
 
 std::string Context::GetAppDirectoryPath(std::string appName) {
 #if defined(__ANDROID__)
-    const char* externaldir = "/storage/emulated/0/SOH";//SDL_AndroidGetExternalStoragePath();
+    const char* externaldir = LUS_ANDROID_DATA_DIR;//SDL_AndroidGetExternalStoragePath();
     if (externaldir != NULL) {
         return externaldir;
     }
